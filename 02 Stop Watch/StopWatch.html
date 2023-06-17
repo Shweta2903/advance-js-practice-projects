@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Stop Watch</title>
+		<style>
+			.body {
+				width: 250px;
+				background-color: gainsboro;			 
+				color: darkblue;
+				padding: 30px;
+				margin: auto;
+			    text-align: center;
+				border-radius: 150px;
+				box-shadow:rgba(50, 50, 50, 0.4) 0 0 5px 5px;
+				}
+			.btn {
+				align-items: center;
+				border: 0;
+				appearance: none;
+				background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
+				border-radius: 8px;
+				box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+				font-size: 15px;
+				color: #fff;
+				font-family: "JetBrains Mono",monospace;
+				box-sizing: border-box;
+				display: inline-flex;
+				height: 40px;
+				width: 75px;
+				line-height: 1;
+				justify-content: center;
+				cursor: pointer;
+				list-style: none;
+				position: relative;
+				text-align: left;
+				transition: box-shadow .15s,transform .15s;
+				user-select: none;
+				-webkit-user-select: none;
+				white-space: nowrap;
+				touch-action: manipulation;
+				overflow: hidden;
+				will-change: box-shadow,transform;
+			}
+			.btn:focus {
+				 box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+            }
+			.btn:hover {
+				box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset; 
+				transform: translateY(-2px);
+			}
+
+			.btn:active {
+            box-shadow: #3c4fe0 0 3px 7px inset;
+            transform: translateY(2px);
+            }
+           .display {
+	       height: 60px;
+	       width: 180px;
+	       font-size: 7.5mm;
+	       text-align: center;
+	        border-radius: 10px;
+			}
+			.h1 {
+			text-shadow: 0 2px white;
+			}
+			</style>
+		</head>
+
+	<body>
+		<div class="body">
+			<h1>STOP WATCH</h1>
+			<input type="text" class="display" id="display" value="00 : 00 : 00" readonly></input><br>
+			<button type="button" class="btn" onclick="timerStart()">START</button><br>
+			<button type="button" class="btn" onclick="timeStop()">STOP</button><br>
+			<button type="button" class="btn" onclick="timeReset()">RESET</button>
+		</div>
+		<script>
+            let [millisecond, seconds, minutes] = [ 0, 0, 0 ];
+            let timer = document.getElementById("display");
+			let int = null; 
+			function timerStart(){
+				if(int !== null);
+				clearInterval(int);
+				int = setInterval(myTimer, 10);
+			};
+
+			function timeStop(){
+				clearInterval(int);
+			};
+         
+			function timeReset(){
+				clearInterval(int);
+				[millisecond, seconds, minutes] = [ 0, 0, 0 ];
+				timer.value = " 00 : 00 : 00"; 	
+			};
+            
+			function myTimer(){
+				millisecond += 1;
+				if(millisecond == 100){
+					millisecond = 0;
+					seconds++;
+					if(seconds == 60){
+						seconds = 0;
+						minutes++;
+					}
+				}
+				let ms = millisecond < 10 ? "0" + millisecond:millisecond;
+				let s = seconds < 10 ? "0" + seconds:seconds;
+				let m = minutes < 10 ? "0" + minutes:minutes;
+                timer.value = `${m} : ${s} : ${ms}`;
+			}
+	  				</script>
+	</body>
+</html>

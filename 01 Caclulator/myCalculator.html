@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=, initial-scale=1.0"> 
+<title>Calculator</title>
+<style>
+.display {
+  background-color: yellow;
+  width: 260px;
+  height: 60px;
+  font-size:25px;}
+.klc {
+  background-color: red;
+  border-radius: 10px;
+  width: 50px;
+  height: 50px;
+  padding: 20px;
+  font-size:20px;
+  color: white;
+  margin: 5.5px;
+  }
+.calculator{
+  width: 270px;
+  margin: auto;
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(6, 6, 6, 0.4);
+}
+</style> 
+</head>
+
+<body>
+<div class="calculator">
+ <h1>Use this Calculator</h1>
+<table>
+	<input class="display" id="Disp" readonly>
+<tr>
+<td><button type="button" class="klc" onclick="Result('9')">9</button></td>
+<td><button type="button" class="klc" onclick="Result('8')">8</button></td>
+<td><button type="button" class="klc" onclick="Result('7')">7</button></td>
+<td><button type="button" class="klc" onclick="Result(`/`)">/</button></td>
+</tr>
+<tr>
+<td><button type="button" class="klc" onclick="Result('6')">6</button></td>
+<td><button type="button" class="klc" onclick="Result('5')">5</button></td>
+<td><button type="button" class="klc" onclick="Result('4')">4</button></td>
+<td><button type="button" class="klc" onclick="Result('*')">*</button></td>
+</tr>
+<tr>
+<td><button type="button" class="klc" onclick="Result('3')">3</button></td>
+<td><button type="button" class="klc" onclick="Result('2')">2</button></td>
+<td><button type="button" class="klc" onclick="Result('1')">1</button></td>
+<td><button type="button" class="klc" onclick="Result('-')">-</button></td>
+</tr>
+<tr>
+<td><button type="button" class="klc" onclick="CalculateResult()">=</button></td>
+<td><button type="button" class="klc" onclick="Result('0')">0</button></td>
+<td><button type="button" class="klc" onclick="Result('.')">.</button></td>
+<td><button type="button" class="klc" onclick="Result('+')">+</button></td>
+</tr>
+<tr>
+<td><button type="button" class="klc" onclick="Clear()">C</button></td>
+<td><button type="button" class="klc" onclick="BackSpace()">B</button></td>
+<td><button type="button" class="klc" onclick="Result(`(`)">(</button></td>
+<td><button type="button" class="klc" onclick="Result(`)`)">)</button></td>
+</tr>
+</table>
+</div>
+
+<script>
+let display = document.getElementById("Disp"); 
+function Result(value) {
+	display.value += value;
+}
+function BackSpace(){
+	display.value = display.value.slice(0,-1);
+}
+function Clear() {
+	display.value = ' ';
+}
+function CalculateResult() {
+	try {
+		display.value = eval(display.value);
+	} catch (x) {
+		if (x instanceof Error) {
+				display.value = "Error !";
+				const Error = setTimeout(error, 2000);
+				function error() { 
+					display.value = ""; 
+				}
+									}
+	}
+}
+
+</script>
+
+</body>
+</html>
